@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laughing Buddha Restaurant Hampi</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=Nunito:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-background: #1a1a1a;
+      --color-surface: #2d2a24;
+      --color-text: #e8e4dc;
+      --color-primary: #c9a227;
+      --color-secondary: #8b7355;
+    }
+    
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .font-heading {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+    }
+    
+    .font-body {
+      font-family: 'Nunito', sans-serif;
+    }
+    
+    .gradient-overlay {
+      background: linear-gradient(135deg, rgba(26,26,26,0.95) 0%, rgba(45,42,36,0.9) 100%);
+    }
+    
+    .golden-glow {
+      text-shadow: 0 0 40px rgba(201, 162, 39, 0.3);
+    }
+    
+    .card-hover {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+    
+    .zen-pattern {
+      background-image: 
+        radial-gradient(circle at 20% 80%, rgba(201, 162, 39, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(139, 115, 85, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(201, 162, 39, 0.02) 0%, transparent 30%);
+    }
+    
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: reveal 0.8s ease forwards;
+    }
+    
+    @keyframes reveal {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .stagger-1 { animation-delay: 0.1s; }
+    .stagger-2 { animation-delay: 0.2s; }
+    .stagger-3 { animation-delay: 0.3s; }
+    .stagger-4 { animation-delay: 0.4s; }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(2deg); }
+    }
+    
+    .buddha-icon {
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    .divider-line {
+      background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+      height: 1px;
+    }
+    
+    .nav-link {
+      position: relative;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--color-primary);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    /* Mobile menu styles */
+    .mobile-menu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+    
+    .mobile-menu.open {
+      max-height: 400px;
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full font-body" style="background-color: var(--color-background); color: var(--color-text);">
+  <div class="w-full h-full overflow-auto zen-pattern"><!-- Navigation -->
+   <nav class="fixed top-0 left-0 right-0 z-50 gradient-overlay backdrop-blur-md border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="flex justify-between items-center h-16 sm:h-20"><!-- Logo -->
+      <div class="flex items-center gap-2 sm:gap-3">
+       <div class="text-2xl sm:text-3xl buddha-icon">
+        ☸️
+       </div><span id="nav-name" class="font-heading text-lg sm:text-xl font-semibold" style="color: var(--color-primary);">Laughing Buddha</span>
+      </div><!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center gap-6 lg:gap-8"><a href="#home" class="nav-link text-sm tracking-wide hover:opacity-80 transition-opacity">Home</a> <a href="#story" class="nav-link text-sm tracking-wide hover:opacity-80 transition-opacity">Our Story</a> <a href="#menu" class="nav-link text-sm tracking-wide hover:opacity-80 transition-opacity">Menu</a> <a href="#experience" class="nav-link text-sm tracking-wide hover:opacity-80 transition-opacity">Experience</a> <a href="#contact" class="nav-link text-sm tracking-wide hover:opacity-80 transition-opacity">Contact</a>
+      </div><!-- Mobile menu button --> <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-white/5 transition-colors" aria-label="Toggle menu">
+       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+       </svg></button>
+     </div><!-- Mobile Navigation -->
+     <div id="mobile-menu" class="mobile-menu md:hidden">
+      <div class="py-4 space-y-3 border-t border-white/5"><a href="#home" class="block py-2 text-sm tracking-wide hover:opacity-80 transition-opacity" onclick="closeMobileMenu()">Home</a> <a href="#story" class="block py-2 text-sm tracking-wide hover:opacity-80 transition-opacity" onclick="closeMobileMenu()">Our Story</a> <a href="#menu" class="block py-2 text-sm tracking-wide hover:opacity-80 transition-opacity" onclick="closeMobileMenu()">Menu</a> <a href="#experience" class="block py-2 text-sm tracking-wide hover:opacity-80 transition-opacity" onclick="closeMobileMenu()">Experience</a> <a href="#contact" class="block py-2 text-sm tracking-wide hover:opacity-80 transition-opacity" onclick="closeMobileMenu()">Contact</a>
+      </div>
+     </div>
+    </div>
+   </nav><!-- Hero Section -->
+   <section id="home" class="relative min-h-screen flex items-center justify-center px-4 pt-20">
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+     <div class="absolute top-1/4 left-1/4 w-64 sm:w-96 h-64 sm:h-96 rounded-full opacity-10" style="background: radial-gradient(circle, var(--color-primary) 0%, transparent 70%);"></div>
+     <div class="absolute bottom-1/4 right-1/4 w-48 sm:w-72 h-48 sm:h-72 rounded-full opacity-5" style="background: radial-gradient(circle, var(--color-secondary) 0%, transparent 70%);"></div>
+    </div>
+    <div class="text-center max-w-4xl mx-auto relative z-10">
+     <div class="scroll-reveal stagger-1"><span class="text-6xl sm:text-7xl md:text-8xl mb-4 sm:mb-6 block buddha-icon">🪷</span>
+     </div>
+     <h1 id="hero-title" class="scroll-reveal stagger-2 font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 golden-glow leading-tight" style="color: var(--color-primary);">Laughing Buddha Restaurant</h1>
+     <p id="hero-subtitle" class="scroll-reveal stagger-3 text-lg sm:text-xl md:text-2xl font-light mb-6 sm:mb-8 opacity-80 px-4">Hampi's Peaceful Dining Haven</p>
+     <div class="divider-line w-24 sm:w-32 mx-auto mb-6 sm:mb-8 scroll-reveal stagger-3"></div>
+     <p id="hero-description" class="scroll-reveal stagger-4 text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed opacity-70 px-4">A relaxed place to eat, unwind, and enjoy good food near the timeless landscapes of Hampi. Located on the main road in Basapur.</p>
+     <div class="scroll-reveal stagger-4 mt-8 sm:mt-10 flex flex-col sm:flex-row gap-4 justify-center px-4"><a href="#menu" class="card-hover px-6 sm:px-8 py-3 sm:py-4 rounded-full font-medium tracking-wide transition-all text-center" style="background: var(--color-primary); color: var(--color-background);"> Explore Menu </a> <a href="#contact" class="card-hover px-6 sm:px-8 py-3 sm:py-4 rounded-full font-medium tracking-wide border transition-all text-center" style="border-color: var(--color-secondary); color: var(--color-text);"> Find Us </a>
+     </div>
+    </div><!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 opacity-50 animate-bounce hidden sm:block">
+     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+     </svg>
+    </div>
+   </section><!-- Story Section -->
+   <section id="story" class="py-16 sm:py-20 md:py-24 px-4">
+    <div class="max-w-6xl mx-auto">
+     <div class="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
+      <div class="scroll-reveal"><span class="text-xs sm:text-sm uppercase tracking-widest mb-3 sm:mb-4 block" style="color: var(--color-secondary);">Our Story</span>
+       <h2 id="story-title" class="font-heading text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6" style="color: var(--color-primary);">Born from the Soul of Hampi</h2>
+       <div class="divider-line w-16 sm:w-20 mb-6 sm:mb-8"></div>
+       <p id="story-description" class="text-base sm:text-lg leading-relaxed mb-4 sm:mb-6 opacity-80">Laughing Buddha Restaurant was created with one clear idea: serve honest food in a peaceful environment. Inspired by the slow, soulful vibe of Hampi, our restaurant is a place where you can sit back, breathe easy, and enjoy every bite without rush or noise.</p>
+       <p class="text-base sm:text-lg leading-relaxed opacity-70">We believe food tastes better when it is fresh, thoughtfully prepared, and enjoyed in a relaxed space.</p>
+      </div>
+      <div class="scroll-reveal stagger-2">
+       <div class="card-hover rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 relative overflow-hidden" style="background: var(--color-surface);">
+        <div class="absolute top-0 right-0 w-32 sm:w-40 h-32 sm:h-40 opacity-10" style="background: radial-gradient(circle, var(--color-primary) 0%, transparent 70%);"></div>
+        <div class="text-5xl sm:text-6xl mb-4 sm:mb-6">
+         🧘
+        </div>
+        <blockquote class="font-heading text-xl sm:text-2xl italic leading-relaxed" style="color: var(--color-text);">
+         "In the quiet moments between bites, we find our peace."
+        </blockquote>
+        <div class="mt-4 sm:mt-6 flex items-center gap-3">
+         <div class="w-10 sm:w-12 h-0.5" style="background: var(--color-primary);"></div><span class="text-xs sm:text-sm uppercase tracking-wider opacity-60">Our Philosophy</span>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Menu Section -->
+   <section id="menu" class="py-16 sm:py-20 md:py-24 px-4" style="background: linear-gradient(180deg, transparent 0%, rgba(45,42,36,0.3) 50%, transparent 100%);">
+    <div class="max-w-6xl mx-auto">
+     <div class="text-center mb-12 sm:mb-16 scroll-reveal"><span class="text-xs sm:text-sm uppercase tracking-widest mb-3 sm:mb-4 block" style="color: var(--color-secondary);">What We Serve</span>
+      <h2 id="menu-title" class="font-heading text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6" style="color: var(--color-primary);">Nourishment for Body &amp; Soul</h2>
+      <div class="divider-line w-24 sm:w-32 mx-auto mb-6 sm:mb-8"></div>
+      <p id="menu-subtitle" class="text-base sm:text-lg max-w-2xl mx-auto opacity-70 px-4">We offer a carefully prepared menu that focuses on fresh ingredients and balanced flavors.</p>
+     </div>
+     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"><!-- Menu Card 1 -->
+      <div class="scroll-reveal stagger-1 card-hover rounded-xl sm:rounded-2xl p-5 sm:p-6 md:p-8 text-center" style="background: var(--color-surface); border: 1px solid rgba(201,162,39,0.1);">
+       <div class="text-4xl sm:text-5xl mb-3 sm:mb-4">
+        🥗
+       </div>
+       <h3 class="font-heading text-lg sm:text-xl font-semibold mb-2 sm:mb-3" style="color: var(--color-primary);">Vegan-Friendly</h3>
+       <p class="text-sm sm:text-base opacity-70">Plant-based dishes made with love and care</p>
+      </div><!-- Menu Card 2 -->
+      <div class="scroll-reveal stagger-2 card-hover rounded-xl sm:rounded-2xl p-5 sm:p-6 md:p-8 text-center" style="background: var(--color-surface); border: 1px solid rgba(201,162,39,0.1);">
+       <div class="text-4xl sm:text-5xl mb-3 sm:mb-4">
+        🍲
+       </div>
+       <h3 class="font-heading text-lg sm:text-xl font-semibold mb-2 sm:mb-3" style="color: var(--color-primary);">Light Meals</h3>
+       <p class="text-sm sm:text-base opacity-70">Nourishing dishes perfect for travelers</p>
+      </div><!-- Menu Card 3 -->
+      <div class="scroll-reveal stagger-3 card-hover rounded-xl sm:rounded-2xl p-5 sm:p-6 md:p-8 text-center" style="background: var(--color-surface); border: 1px solid rgba(201,162,39,0.1);">
+       <div class="text-4xl sm:text-5xl mb-3 sm:mb-4">
+        ✨
+       </div>
+       <h3 class="font-heading text-lg sm:text-xl font-semibold mb-2 sm:mb-3" style="color: var(--color-primary);">Fresh Daily</h3>
+       <p class="text-sm sm:text-base opacity-70">Prepared fresh with consistent quality</p>
+      </div><!-- Menu Card 4 -->
+      <div class="scroll-reveal stagger-4 card-hover rounded-xl sm:rounded-2xl p-5 sm:p-6 md:p-8 text-center" style="background: var(--color-surface); border: 1px solid rgba(201,162,39,0.1);">
+       <div class="text-4xl sm:text-5xl mb-3 sm:mb-4">
+        🏠
+       </div>
+       <h3 class="font-heading text-lg sm:text-xl font-semibold mb-2 sm:mb-3" style="color: var(--color-primary);">Homemade</h3>
+       <p class="text-sm sm:text-base opacity-70">Simple, satisfying homemade flavors</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- Experience Section -->
+   <section id="experience" class="py-16 sm:py-20 md:py-24 px-4">
+    <div class="max-w-6xl mx-auto">
+     <div class="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
+      <div class="order-2 md:order-1 scroll-reveal">
+       <div class="card-hover rounded-2xl sm:rounded-3xl overflow-hidden" style="background: var(--color-surface);">
+        <div class="p-6 sm:p-8 md:p-10">
+         <div class="flex flex-wrap gap-3 sm:gap-4 mb-6 sm:mb-8"><span class="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm" style="background: rgba(201,162,39,0.2); color: var(--color-primary);">🌅 Sunrise Views</span> <span class="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm" style="background: rgba(201,162,39,0.2); color: var(--color-primary);">🌿 Natural Light</span> <span class="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm" style="background: rgba(201,162,39,0.2); color: var(--color-primary);">🍃 Open Air</span>
+         </div>
+         <div class="space-y-4 sm:space-y-6">
+          <div class="flex items-start gap-3 sm:gap-4">
+           <div class="w-2 h-2 rounded-full mt-2 flex-shrink-0" style="background: var(--color-primary);"></div>
+           <p class="opacity-80 text-sm sm:text-base">Relaxed breakfasts with morning light</p>
+          </div>
+          <div class="flex items-start gap-3 sm:gap-4">
+           <div class="w-2 h-2 rounded-full mt-2 flex-shrink-0" style="background: var(--color-primary);"></div>
+           <p class="opacity-80 text-sm sm:text-base">Slow lunches in natural surroundings</p>
+          </div>
+          <div class="flex items-start gap-3 sm:gap-4">
+           <div class="w-2 h-2 rounded-full mt-2 flex-shrink-0" style="background: var(--color-primary);"></div>
+           <p class="opacity-80 text-sm sm:text-base">Calm evening meals under the sky</p>
+          </div>
+         </div>
+        </div>
+        <div class="p-6 sm:p-8 border-t" style="border-color: rgba(255,255,255,0.05);">
+         <div class="flex items-center justify-between flex-wrap gap-4"><span class="text-xs sm:text-sm uppercase tracking-wider opacity-60">Perfect for unwinding</span> <span class="text-xl sm:text-2xl">🧘‍♀️</span>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="order-1 md:order-2 scroll-reveal stagger-2"><span class="text-xs sm:text-sm uppercase tracking-widest mb-3 sm:mb-4 block" style="color: var(--color-secondary);">The Experience</span>
+       <h2 id="experience-title" class="font-heading text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6" style="color: var(--color-primary);">Outdoor Seating Paradise</h2>
+       <div class="divider-line w-16 sm:w-20 mb-6 sm:mb-8"></div>
+       <p class="text-base sm:text-lg leading-relaxed mb-4 sm:mb-6 opacity-80">One of the things our guests appreciate most is our outdoor seating. Surrounded by open space and natural light, it's the perfect setting for any meal.</p>
+       <p class="text-base sm:text-lg leading-relaxed opacity-70">The atmosphere is quiet, open, and ideal for unwinding after a long day of exploring Hampi's ancient wonders.</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- Info Section -->
+   <section class="py-16 sm:py-20 md:py-24 px-4" style="background: var(--color-surface);">
+    <div class="max-w-6xl mx-auto">
+     <div class="text-center mb-12 sm:mb-16 scroll-reveal">
+      <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6" style="color: var(--color-primary);">Good to Know</h2>
+      <div class="divider-line w-24 sm:w-32 mx-auto"></div>
+     </div>
+     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
+      <div class="scroll-reveal stagger-1 text-center p-4 sm:p-6">
+       <div class="text-3xl sm:text-4xl mb-3 sm:mb-4">
+        🪑
+       </div>
+       <h3 class="font-heading text-base sm:text-lg font-semibold mb-2" style="color: var(--color-text);">Outdoor Seating</h3>
+       <p class="text-xs sm:text-sm opacity-60">Available</p>
+      </div>
+      <div class="scroll-reveal stagger-2 text-center p-4 sm:p-6">
+       <div class="text-3xl sm:text-4xl mb-3 sm:mb-4">
+        🌱
+       </div>
+       <h3 class="font-heading text-base sm:text-lg font-semibold mb-2" style="color: var(--color-text);">Vegan Options</h3>
+       <p class="text-xs sm:text-sm opacity-60">Plenty to choose</p>
+      </div>
+      <div class="scroll-reveal stagger-3 text-center p-4 sm:p-6">
+       <div class="text-3xl sm:text-4xl mb-3 sm:mb-4">
+        🚶
+       </div>
+       <h3 class="font-heading text-base sm:text-lg font-semibold mb-2" style="color: var(--color-text);">Walk-ins</h3>
+       <p class="text-xs sm:text-sm opacity-60">Always welcome</p>
+      </div>
+      <div class="scroll-reveal stagger-4 text-center p-4 sm:p-6">
+       <div class="text-3xl sm:text-4xl mb-3 sm:mb-4">
+        📋
+       </div>
+       <h3 class="font-heading text-base sm:text-lg font-semibold mb-2" style="color: var(--color-text);">Reservations</h3>
+       <p class="text-xs sm:text-sm opacity-60">Not required</p>
+      </div>
+     </div>
+     <div class="text-center mt-8 sm:mt-12 scroll-reveal">
+      <p class="text-sm sm:text-base opacity-70 italic">We follow a simple first-come, first-served approach to keep things easy and flexible for everyone.</p>
+     </div>
+    </div>
+   </section><!-- Hours Section -->
+   <section class="py-16 sm:py-20 md:py-24 px-4" style="background: var(--color-surface);">
+    <div class="max-w-6xl mx-auto">
+     <div class="text-center mb-12 sm:mb-16 scroll-reveal">
+      <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6" style="color: var(--color-primary);">Hours of Operation</h2>
+      <div class="divider-line w-24 sm:w-32 mx-auto"></div>
+     </div>
+     <div class="grid sm:grid-cols-2 gap-6 sm:gap-8 max-w-2xl mx-auto">
+      <div class="scroll-reveal stagger-1 card-hover rounded-xl sm:rounded-2xl p-6 sm:p-8 text-center" style="background: rgba(201,162,39,0.1); border: 1px solid rgba(201,162,39,0.2);">
+       <div class="text-4xl sm:text-5xl mb-4 sm:mb-6">
+        🕐
+       </div>
+       <h3 class="font-heading text-lg sm:text-xl font-semibold mb-3 sm:mb-4" style="color: var(--color-primary);">Opening Hours</h3>
+       <p id="opening-hours" class="text-base sm:text-lg font-medium">7:00 AM - 10:00 PM</p>
+      </div>
+      <div class="scroll-reveal stagger-2 card-hover rounded-xl sm:rounded-2xl p-6 sm:p-8 text-center" style="background: rgba(201,162,39,0.1); border: 1px solid rgba(201,162,39,0.2);">
+       <div class="text-4xl sm:text-5xl mb-4 sm:mb-6">
+        📅
+       </div>
+       <h3 class="font-heading text-lg sm:text-xl font-semibold mb-3 sm:mb-4" style="color: var(--color-primary);">Closed On</h3>
+       <p id="closing-day" class="text-base sm:text-lg font-medium">Open all days</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- Gallery Section -->
+   <section id="gallery" class="py-16 sm:py-20 md:py-24 px-4" style="background: var(--color-surface);">
+    <div class="max-w-6xl mx-auto">
+     <div class="text-center mb-12 sm:mb-16 scroll-reveal"><span class="text-xs sm:text-sm uppercase tracking-widest mb-3 sm:mb-4 block" style="color: var(--color-secondary);">Visual Journey</span>
+      <h2 id="gallery-title" class="font-heading text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6" style="color: var(--color-primary);">Our Space &amp; Moments</h2>
+      <div class="divider-line w-24 sm:w-32 mx-auto mb-6 sm:mb-8"></div>
+      <p class="text-base sm:text-lg max-w-2xl mx-auto opacity-70 px-4">A glimpse into the peaceful ambiance and culinary excellence at Laughing Buddha</p>
+     </div>
+     <div class="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
+      <div class="scroll-reveal stagger-1 cursor-pointer group overflow-hidden rounded-xl sm:rounded-2xl h-48 sm:h-64 md:h-72" onclick="openLightbox(0)"><img src="https://lh3.googleusercontent.com/p/AF1QipMttNaclVBHt3ZAkk44Y_Ex13ZmVT75vP6gzsAg=s1360-w1360-h1020-rw" alt="Restaurant interior" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" onerror="console.error('Image failed to load:', this.src); this.style.background='#e5e7eb'; this.alt='Image unavailable';">
+      </div>
+      <div class="scroll-reveal stagger-2 cursor-pointer group overflow-hidden rounded-xl sm:rounded-2xl h-48 sm:h-64 md:h-72" onclick="openLightbox(1)"><img src="https://lh3.googleusercontent.com/gps-cs-s/AHVAweppisox5zu0XFU_3zL5BCof3tHcXQJFWIJ3GxMmfVZxKSzGiDjJ8PodY-eT_XkFYwcVMycqahW3DoOR__L-HmeL51zdvY1TfZ4Q2-3MdUsEsskWyNR1PZcZZpWphUYqSfGgMWHCmLZgJ24=s1360-w1360-h1020-rw" alt="Outdoor seating" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" onerror="console.error('Image failed to load:', this.src); this.style.background='#e5e7eb'; this.alt='Image unavailable';">
+      </div>
+      <div class="scroll-reveal stagger-3 cursor-pointer group overflow-hidden rounded-xl sm:rounded-2xl h-48 sm:h-64 md:h-72" onclick="openLightbox(2)"><img src="https://lh3.googleusercontent.com/gps-cs-s/AHVAweps6azNVEqJvPizkq0XpHV7shTen9mUJTurd2ufKaZmjYMmwOPKsaebRcJrYeBGRJV6V8J6vAd_7VQH-pBEs1CbAaFGV4urAuKWwH4C2JC1x6ZMMVcZhSABu2vkkJPc6klOjuOGGB5d_3pF=s1360-w1360-h1020-rw" alt="Dining area" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" onerror="console.error('Image failed to load:', this.src); this.style.background='#e5e7eb'; this.alt='Image unavailable';">
+      </div>
+      <div class="scroll-reveal stagger-4 cursor-pointer group overflow-hidden rounded-xl sm:rounded-2xl h-48 sm:h-64 md:h-72" onclick="openLightbox(3)"><img src="https://lh3.googleusercontent.com/p/AF1QipMl_Vl18_Nua_wEWC6USyu67OJJ8iqSUEedxZ9t=s1360-w1360-h1020-rw" alt="Food presentation" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" onerror="console.error('Image failed to load:', this.src); this.style.background='#e5e7eb'; this.alt='Image unavailable';">
+      </div>
+      <div class="scroll-reveal stagger-1 cursor-pointer group overflow-hidden rounded-xl sm:rounded-2xl h-48 sm:h-64 md:h-72" onclick="openLightbox(4)"><img src="https://lh3.googleusercontent.com/p/AF1QipMk_o-vRBXl-4GmGZo7yUZaE7QRUikTZfeURrFc=s1360-w1360-h1020-rw" alt="Restaurant ambiance" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" onerror="console.error('Image failed to load:', this.src); this.style.background='#e5e7eb'; this.alt='Image unavailable';">
+      </div>
+      <div class="scroll-reveal stagger-2 cursor-pointer group overflow-hidden rounded-xl sm:rounded-2xl h-48 sm:h-64 md:h-72" onclick="openLightbox(5)"><img src="https://lh3.googleusercontent.com/gps-cs-s/AHVAwep3Bwl9_91eWF1Zcv79Y5ogPcH2fUU5_73K9WFO_TEvLrrJED39Nioe5WoNJZIEv3RxTv0UmTM1495qEItPuN-1_RqvmJaRVmHogKZctrgdxCVloRHRFJbxW_vhU9HNkL9UfPoGtFKM4QA=s1360-w1360-h1020-rw" alt="Food details" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" onerror="console.error('Image failed to load:', this.src); this.style.background='#e5e7eb'; this.alt='Image unavailable';">
+      </div>
+      <div class="scroll-reveal stagger-3 cursor-pointer group overflow-hidden rounded-xl sm:rounded-2xl h-48 sm:h-64 md:h-72 col-span-2 md:col-span-1" onclick="openLightbox(6)"><img src="https://lh3.googleusercontent.com/gps-cs-s/AHVAwerOHilaPbyqgFySSprBcyWpRNRapfoUBMKOlCs8rAzF-p1vpreDJ1Z3ElRSGCxgfztrarQOiCGaKoOtacJ1w68txvNpnfc0hAqgenY_wWTF35tN_XGMkEyg9iYi5N3eAd-gSnU2Al8AgQoL=s1360-w1360-h1020-rw" alt="Evening view" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" onerror="console.error('Image failed to load:', this.src); this.style.background='#e5e7eb'; this.alt='Image unavailable';">
+      </div>
+     </div>
+    </div>
+   </section><!-- Lightbox Modal -->
+   <div id="lightbox" class="fixed inset-0 z-50 hidden bg-black/95 flex items-center justify-center p-4" style="backdrop-filter: blur(5px);"><button class="absolute top-4 right-4 sm:top-6 sm:right-6 text-white/60 hover:text-white transition-colors p-2" onclick="closeLightbox()">
+     <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+     </svg></button> <button class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 text-white/60 hover:text-white transition-colors p-2 sm:p-3" onclick="prevImage()">
+     <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+     </svg></button> <img id="lightbox-img" src="" alt="Gallery image" class="max-w-full max-h-[80vh] object-contain rounded-lg"> <button class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 text-white/60 hover:text-white transition-colors p-2 sm:p-3" onclick="nextImage()">
+     <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+     </svg></button>
+    <div class="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 text-white/60 text-sm sm:text-base"><span id="image-counter">1</span> / <span id="image-total">7</span>
+    </div>
+   </div><!-- Contact Section -->
+   <section id="contact" class="py-16 sm:py-20 md:py-24 px-4">
+    <div class="max-w-4xl mx-auto">
+     <div class="text-center mb-12 sm:mb-16 scroll-reveal"><span class="text-xs sm:text-sm uppercase tracking-widest mb-3 sm:mb-4 block" style="color: var(--color-secondary);">Find Us</span>
+      <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6" style="color: var(--color-primary);">Visit Laughing Buddha</h2>
+      <div class="divider-line w-24 sm:w-32 mx-auto"></div>
+     </div>
+     <div class="grid sm:grid-cols-2 gap-6 sm:gap-8"><!-- Address Card -->
+      <div class="scroll-reveal stagger-1 card-hover rounded-xl sm:rounded-2xl p-6 sm:p-8 text-center" style="background: var(--color-surface); border: 1px solid rgba(201,162,39,0.1);">
+       <div class="text-4xl sm:text-5xl mb-4 sm:mb-6">
+        📍
+       </div>
+       <h3 class="font-heading text-lg sm:text-xl font-semibold mb-3 sm:mb-4" style="color: var(--color-primary);">Address</h3>
+       <p id="contact-address" class="text-sm sm:text-base opacity-80 leading-relaxed">Main Road, Basapur,<br>
+         Karnataka 583234</p>
+      </div><!-- Phone Card -->
+      <div class="scroll-reveal stagger-2 card-hover rounded-xl sm:rounded-2xl p-6 sm:p-8 text-center" style="background: var(--color-surface); border: 1px solid rgba(201,162,39,0.1);">
+       <div class="text-4xl sm:text-5xl mb-4 sm:mb-6">
+        📞
+       </div>
+       <h3 class="font-heading text-lg sm:text-xl font-semibold mb-3 sm:mb-4" style="color: var(--color-primary);">Phone</h3><a id="contact-phone" href="tel:+919482767374" class="text-lg sm:text-xl hover:opacity-80 transition-opacity" style="color: var(--color-text);"> +91 94827 67374 </a>
+      </div>
+     </div>
+     <div class="text-center mt-10 sm:mt-12 scroll-reveal stagger-3">
+      <p class="text-sm sm:text-base opacity-70 mb-6 sm:mb-8 px-4">If you're nearby and looking for a peaceful place to eat, feel free to drop in or call us.</p><a href="tel:+919482767374" class="card-hover inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-medium tracking-wide transition-all text-sm sm:text-base" style="background: var(--color-primary); color: var(--color-background);"> <span>📞</span> <span>Call Now</span> </a>
+     </div>
+    </div>
+   </section><!-- Why Choose Section -->
+   <section class="py-16 sm:py-20 md:py-24 px-4" style="background: linear-gradient(180deg, transparent 0%, rgba(45,42,36,0.3) 50%, transparent 100%);">
+    <div class="max-w-6xl mx-auto">
+     <div class="text-center mb-12 sm:mb-16 scroll-reveal">
+      <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6" style="color: var(--color-primary);">Why Choose Us</h2>
+      <div class="divider-line w-24 sm:w-32 mx-auto"></div>
+     </div>
+     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
+      <div class="scroll-reveal stagger-1 text-center p-4 sm:p-6 rounded-xl sm:rounded-2xl" style="background: rgba(45,42,36,0.5);">
+       <div class="text-2xl sm:text-3xl mb-2 sm:mb-3">
+        🧘
+       </div>
+       <p class="text-xs sm:text-sm opacity-80">Calm atmosphere</p>
+      </div>
+      <div class="scroll-reveal stagger-2 text-center p-4 sm:p-6 rounded-xl sm:rounded-2xl" style="background: rgba(45,42,36,0.5);">
+       <div class="text-2xl sm:text-3xl mb-2 sm:mb-3">
+        ✨
+       </div>
+       <p class="text-xs sm:text-sm opacity-80">Clean &amp; comfortable</p>
+      </div>
+      <div class="scroll-reveal stagger-3 text-center p-4 sm:p-6 rounded-xl sm:rounded-2xl" style="background: rgba(45,42,36,0.5);">
+       <div class="text-2xl sm:text-3xl mb-2 sm:mb-3">
+        🌱
+       </div>
+       <p class="text-xs sm:text-sm opacity-80">Fresh vegan options</p>
+      </div>
+      <div class="scroll-reveal stagger-4 text-center p-4 sm:p-6 rounded-xl sm:rounded-2xl" style="background: rgba(45,42,36,0.5);">
+       <div class="text-2xl sm:text-3xl mb-2 sm:mb-3">
+        📍
+       </div>
+       <p class="text-xs sm:text-sm opacity-80">Near Hampi</p>
+      </div>
+      <div class="scroll-reveal stagger-4 text-center p-4 sm:p-6 rounded-xl sm:rounded-2xl col-span-2 md:col-span-1" style="background: rgba(45,42,36,0.5);">
+       <div class="text-2xl sm:text-3xl mb-2 sm:mb-3">
+        💛
+       </div>
+       <p class="text-xs sm:text-sm opacity-80">Friendly service</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- Footer -->
+   <footer class="py-12 sm:py-16 px-4 border-t" style="border-color: rgba(255,255,255,0.05);">
+    <div class="max-w-6xl mx-auto">
+     <div class="text-center">
+      <div class="flex items-center justify-center gap-2 sm:gap-3 mb-4 sm:mb-6"><span class="text-3xl sm:text-4xl buddha-icon">☸️</span> <span id="footer-name" class="font-heading text-xl sm:text-2xl font-semibold" style="color: var(--color-primary);">Laughing Buddha Restaurant</span>
+      </div>
+      <p class="text-xs sm:text-sm opacity-60 mb-4 sm:mb-6">Main Road, Basapur, Karnataka 583234</p>
+      <div class="divider-line w-16 sm:w-24 mx-auto mb-4 sm:mb-6"></div>
+      <p class="text-xs sm:text-sm opacity-40">© 2024 Laughing Buddha Restaurant. Peace &amp; Good Food.</p>
+     </div>
+    </div>
+   </footer>
+  </div>
+  <script>
+    // Default configuration
+    const defaultConfig = {
+      restaurant_name: 'Laughing Buddha Restaurant',
+      tagline: "Hampi's Peaceful Dining Haven",
+      phone_number: '+91 94827 67374',
+      address: 'Main Road, Basapur, Karnataka 583234',
+      hero_description: 'A relaxed place to eat, unwind, and enjoy good food near the timeless landscapes of Hampi. Located on the main road in Basapur.',
+      story_title: 'Born from the Soul of Hampi',
+      story_description: 'Laughing Buddha Restaurant was created with one clear idea: serve honest food in a peaceful environment. Inspired by the slow, soulful vibe of Hampi, our restaurant is a place where you can sit back, breathe easy, and enjoy every bite without rush or noise.',
+      menu_title: 'Nourishment for Body & Soul',
+      menu_subtitle: 'We offer a carefully prepared menu that focuses on fresh ingredients and balanced flavors.',
+      experience_title: 'Outdoor Seating Paradise',
+      gallery_title: 'Our Space & Moments',
+      opening_hours: '7:00 AM - 10:00 PM',
+      closing_day: 'Open all days',
+      footer_text: '© 2024 Laughing Buddha Restaurant. Peace & Good Food.',
+      background_color: '#1a1a1a',
+      surface_color: '#2d2a24',
+      text_color: '#e8e4dc',
+      primary_color: '#c9a227',
+      secondary_color: '#8b7355',
+      font_family: 'Nunito',
+      font_size: 16
+    };
+    
+    // Mobile menu functionality
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    let menuOpen = false;
+    
+    mobileMenuBtn.addEventListener('click', () => {
+      menuOpen = !menuOpen;
+      mobileMenu.classList.toggle('open', menuOpen);
+    });
+    
+    function closeMobileMenu() {
+      menuOpen = false;
+      mobileMenu.classList.remove('open');
+    }
+    
+    // Gallery lightbox functionality
+    const galleryImages = [
+      'https://lh3.googleusercontent.com/p/AF1QipMttNaclVBHt3ZAkk44Y_Ex13ZmVT75vP6gzsAg=s1360-w1360-h1020-rw',
+      'https://lh3.googleusercontent.com/gps-cs-s/AHVAweppisox5zu0XFU_3zL5BCof3tHcXQJFWIJ3GxMmfVZxKSzGiDjJ8PodY-eT_XkFYwcVMycqahW3DoOR__L-HmeL51zdvY1TfZ4Q2-3MdUsEsskWyNR1PZcZZpWphUYqSfGgMWHCmLZgJ24=s1360-w1360-h1020-rw',
+      'https://lh3.googleusercontent.com/gps-cs-s/AHVAweps6azNVEqJvPizkq0XpHV7shTen9mUJTurd2ufKaZmjYMmwOPKsaebRcJrYeBGRJV6V8J6vAd_7VQH-pBEs1CbAaFGV4urAuKWwH4C2JC1x6ZMMVcZhSABu2vkkJPc6klOjuOGGB5d_3pF=s1360-w1360-h1020-rw',
+      'https://lh3.googleusercontent.com/p/AF1QipMl_Vl18_Nua_wEWC6USyu67OJJ8iqSUEedxZ9t=s1360-w1360-h1020-rw',
+      'https://lh3.googleusercontent.com/p/AF1QipMk_o-vRBXl-4GmGZo7yUZaE7QRUikTZfeURrFc=s1360-w1360-h1020-rw',
+      'https://lh3.googleusercontent.com/gps-cs-s/AHVAwep3Bwl9_91eWF1Zcv79Y5ogPcH2fUU5_73K9WFO_TEvLrrJED39Nioe5WoNJZIEv3RxTv0UmTM1495qEItPuN-1_RqvmJaRVmHogKZctrgdxCVloRHRFJbxW_vhU9HNkL9UfPoGtFKM4QA=s1360-w1360-h1020-rw',
+      'https://lh3.googleusercontent.com/gps-cs-s/AHVAwerOHilaPbyqgFySSprBcyWpRNRapfoUBMKOlCs8rAzF-p1vpreDJ1Z3ElRSGCxgfztrarQOiCGaKoOtacJ1w68txvNpnfc0hAqgenY_wWTF35tN_XGMkEyg9iYi5N3eAd-gSnU2Al8AgQoL=s1360-w1360-h1020-rw'
+    ];
+    
+    let currentImageIndex = 0;
+    
+    function openLightbox(index) {
+      currentImageIndex = index;
+      updateLightbox();
+      document.getElementById('lightbox').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    }
+    
+    function nextImage() {
+      currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+      updateLightbox();
+    }
+    
+    function prevImage() {
+      currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+      updateLightbox();
+    }
+    
+    function updateLightbox() {
+      const lightboxImg = document.getElementById('lightbox-img');
+      lightboxImg.src = galleryImages[currentImageIndex];
+      document.getElementById('image-counter').textContent = currentImageIndex + 1;
+      document.getElementById('image-total').textContent = galleryImages.length;
+    }
+    
+    // Keyboard navigation for lightbox
+    document.addEventListener('keydown', (e) => {
+      const lightbox = document.getElementById('lightbox');
+      if (!lightbox.classList.contains('hidden')) {
+        if (e.key === 'ArrowLeft') prevImage();
+        if (e.key === 'ArrowRight') nextImage();
+        if (e.key === 'Escape') closeLightbox();
+      }
+    });
+    
+    
+    // Smooth scroll for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+    
+    // Element SDK initialization
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (config) => {
+          // Update restaurant name
+          const name = config.restaurant_name || defaultConfig.restaurant_name;
+          document.getElementById('nav-name').textContent = name.split(' ').slice(0, 2).join(' ');
+          document.getElementById('hero-title').textContent = name;
+          document.getElementById('footer-name').textContent = name;
+          
+          // Update tagline
+          const tagline = config.tagline || defaultConfig.tagline;
+          document.getElementById('hero-subtitle').textContent = tagline;
+          
+          // Update hero description
+          const heroDesc = config.hero_description || defaultConfig.hero_description;
+          document.getElementById('hero-description').textContent = heroDesc;
+          
+          // Update story section
+          const storyTitle = config.story_title || defaultConfig.story_title;
+          document.getElementById('story-title').textContent = storyTitle;
+          
+          const storyDesc = config.story_description || defaultConfig.story_description;
+          document.getElementById('story-description').textContent = storyDesc;
+          
+          // Update menu section
+          const menuTitle = config.menu_title || defaultConfig.menu_title;
+          document.getElementById('menu-title').textContent = menuTitle;
+          
+          const menuSubtitle = config.menu_subtitle || defaultConfig.menu_subtitle;
+          document.getElementById('menu-subtitle').textContent = menuSubtitle;
+          
+          // Update experience section
+          const experienceTitle = config.experience_title || defaultConfig.experience_title;
+          document.getElementById('experience-title').textContent = experienceTitle;
+          
+          // Update gallery title
+          const galleryTitle = config.gallery_title || 'Our Space & Moments';
+          document.getElementById('gallery-title').textContent = galleryTitle;
+          
+          // Update operating hours
+          const hours = config.opening_hours || defaultConfig.opening_hours;
+          document.getElementById('opening-hours').textContent = hours;
+          
+          const closedDay = config.closing_day || defaultConfig.closing_day;
+          document.getElementById('closing-day').textContent = closedDay;
+          
+          // Update phone
+          const phone = config.phone_number || defaultConfig.phone_number;
+          const phoneEl = document.getElementById('contact-phone');
+          phoneEl.textContent = phone;
+          phoneEl.href = `tel:${phone.replace(/\s/g, '')}`;
+          
+          // Update address
+          const address = config.address || defaultConfig.address;
+          document.getElementById('contact-address').innerHTML = address.replace(', ', ',<br>');
+          
+          // Update colors
+          const root = document.documentElement;
+          root.style.setProperty('--color-background', config.background_color || defaultConfig.background_color);
+          root.style.setProperty('--color-surface', config.surface_color || defaultConfig.surface_color);
+          root.style.setProperty('--color-text', config.text_color || defaultConfig.text_color);
+          root.style.setProperty('--color-primary', config.primary_color || defaultConfig.primary_color);
+          root.style.setProperty('--color-secondary', config.secondary_color || defaultConfig.secondary_color);
+          
+          // Update fonts
+          const fontFamily = config.font_family || defaultConfig.font_family;
+          const fontSize = config.font_size || defaultConfig.font_size;
+          document.body.style.fontFamily = `'${fontFamily}', sans-serif`;
+          document.body.style.fontSize = `${fontSize}px`;
+        },
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.background_color || defaultConfig.background_color,
+              set: (value) => window.elementSdk.setConfig({ background_color: value })
+            },
+            {
+              get: () => config.surface_color || defaultConfig.surface_color,
+              set: (value) => window.elementSdk.setConfig({ surface_color: value })
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => window.elementSdk.setConfig({ text_color: value })
+            },
+            {
+              get: () => config.primary_color || defaultConfig.primary_color,
+              set: (value) => window.elementSdk.setConfig({ primary_color: value })
+            },
+            {
+              get: () => config.secondary_color || defaultConfig.secondary_color,
+              set: (value) => window.elementSdk.setConfig({ secondary_color: value })
+            }
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => config.font_family || defaultConfig.font_family,
+            set: (value) => window.elementSdk.setConfig({ font_family: value })
+          },
+          fontSizeable: {
+            get: () => config.font_size || defaultConfig.font_size,
+            set: (value) => window.elementSdk.setConfig({ font_size: value })
+          }
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ['restaurant_name', config.restaurant_name || defaultConfig.restaurant_name],
+          ['tagline', config.tagline || defaultConfig.tagline],
+          ['hero_description', config.hero_description || defaultConfig.hero_description],
+          ['story_title', config.story_title || defaultConfig.story_title],
+          ['story_description', config.story_description || defaultConfig.story_description],
+          ['menu_title', config.menu_title || defaultConfig.menu_title],
+          ['menu_subtitle', config.menu_subtitle || defaultConfig.menu_subtitle],
+          ['experience_title', config.experience_title || defaultConfig.experience_title],
+          ['gallery_title', config.gallery_title || defaultConfig.gallery_title],
+          ['opening_hours', config.opening_hours || defaultConfig.opening_hours],
+          ['closing_day', config.closing_day || defaultConfig.closing_day],
+          ['phone_number', config.phone_number || defaultConfig.phone_number],
+          ['address', config.address || defaultConfig.address],
+          ['footer_text', config.footer_text || defaultConfig.footer_text]
+        ])
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d2c9b94e75ef64c',t:'MTc3MTkxMTQxMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
